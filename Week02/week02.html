@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prophets</title>
+</head>
+<body>
+    <template id="prophet-card">
+        <section class="card">
+            <h2>{{name}} {{lastname}}</h2>
+            <p>Birth Date: {{birthdate}}</p>
+            <p>Birth Place: {{birthplace}}</p>
+            <img class="profile" src="{{imageurl}}" alt="Image of{{name}} {{lastname}}">
+        </section>
+    </template>
+
+    <div id="content"></div>
+
+    <script>
+        fetch('prophet.json')
+          .then(response => response.json())
+          .then(data => {
+            // Get the template element
+            const prophets = data.prophets; // Access the array of prophets
+            for(let prophet of prophets) {
+              const template = document.getElementById('prophet-card');
+              const clone = template.content.cloneNode(true);
+    
+    
+            // Fill in the data
+            clone.querySelector('h2').textContent = `${prophet.name} ${prophet.lastname}`;
+            clone.querySelector('p:nth-child(2)').textContent = `Birth Date: ${prophet.birthdate}`;
+            clone.querySelector('p:nth-child(3)').textContent = `Birth Place: ${prophet.birthplace}`;
+            clone.querySelector('img').src = prophet.imageurl;
+            clone.querySelector('img').alt = `Profile Image of ${prophet.name} ${prophet.lastname}`;
+    
+            // Append the populated clone to the document
+            document.getElementById('content').appendChild(clone); 
+            }
+          })
+          .catch(error => console.error('Error:', error));
+    </script>
+
+
+</body>
+</html>
