@@ -1,4 +1,4 @@
-const url = "https://pokeapi.co/api/v2/pokemon/ditto";
+const url = "https://pokeapi.co/api/v2/pokemon";
 let results = null;
 async function getPokemon(url) {
   const response = await fetch(url);
@@ -32,11 +32,3 @@ function doStuff(data) {
   getPokemon(url);
   console.log("second: ", results);
 
-// // Initial URL for fetching a specific Pokemon (Ditto)
-// const url = "https://pokeapi.co/api/v2/pokemon/ditto";
-// getPokemon(url);
-// console.log("second: ", results);
-
-// // After initial fetch, modify URL to fetch all Pokemon (up to default limit of 20)
-// const allPokemonUrl = "https://pokeapi.co/api/v2/pokemon";
-// getPokemon(allPokemonUrl);
